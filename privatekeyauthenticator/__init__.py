@@ -1,0 +1,3 @@
+from privatekeyauthenticator.privatekeyauthenticator import PrivateKeyAuthenticator
+
+__all__ = [PrivateKeyAuthenticator]
