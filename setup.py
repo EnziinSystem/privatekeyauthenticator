@@ -11,7 +11,6 @@ setup(name='privatekeyauthenticator',
       url='https://github.com/EnziinSystem/privatekeyauthenticator',
       packages=['privatekeyauthenticator'],
       install_requires=[
-          'hashlib',
           'jupyterhub',
       ],
       )
