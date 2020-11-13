@@ -1,15 +1,21 @@
 from jupyterhub.auth import Authenticator
 from tornado import gen
-import hashlib
+from traitlets import Unicode, Integer
+import hashlib, binascii
 import os
 
 
 class PrivateKeyAuthenticator(Authenticator):
+    secret_key = Unicode(
+        config=True,
+        help="Key used to encrypt usernames to produce passwords."
+    )
+
     @gen.coroutine
     def authenticate(self, handler, data):
         password_hashed = data['password']
         username = data['username']
-        private_key = os.getenv('DATA_SCIENCE_ACCESS_KEY')
+        private_key = self.secret_key
 
         # file_log = open("/var/log/authentication.log", "a")
         # file_log.write("****************************************\n")
