@@ -11,25 +11,23 @@ class PrivateKeyAuthenticator(Authenticator):
         username = data['username']
         private_key = os.getenv('DATA_SCIENCE_ACCESS_KEY')
 
-        log_file = open("authentication.log", "a")
+        # file_log = open("/var/log/authentication.log", "a")
+        # file_log.write("****************************************\n")
+        # file_log.write("Password hashed: " + str(password_hashed) + "\n")
+        # file_log.write("username: " + str(username) + "\n")
+        # file_log.write("private_key: " + str(private_key) + "\n")
+        # file_log.write("****************************************\n")
 
-        log_file.write("****************************************")
-        log_file.write("Password hashed: " + password_hashed)
-        log_file.write("username: " + username)
-        log_file.write("private_key: " + private_key)
-        log_file.write("****************************************")
-
-        str2hash = username + "-" + private_key
+        str2hash = str(username) + "-" + str(private_key)
         result = hashlib.md5(str2hash.encode())
         key_hash = result.hexdigest()
 
-        log_file.write("****************************************")
-        log_file.write("Key hashed: " + key_hash + " == " + password_hashed)
-        log_file.write("****************************************")
+        # file_log.write("****************************************\n")
+        # file_log.write("Key hashed: " + str(key_hash) + " == " + str(password_hashed) + "\n")
+        # file_log.write("****************************************\n")
+        # file_log.close()
 
-        log_file.close()
-
-        if key_hash == password_hashed:
+        if key_hash == str(password_hashed):
             return data['username']
         else:
             return None
